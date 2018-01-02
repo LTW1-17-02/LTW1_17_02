@@ -31,8 +31,9 @@ function updateUserPassword($userId, $hashPassword) {
   $stmt->execute(array($hashPassword, $userId));
 }
 function selectSanPhamMoi()
-{	global $db;
-  $stmt = $db->prepare("SELECT id,tensp,loai,gia,soluong,mota,image,xuatsu,createAt,luotxem from sanpham group by tensp,giatien,hinhanh,ngaynhap order by soluongban desc limit 5 ");
+{	
+  global $db;
+  $stmt = $db->prepare("SELECT * from san_pham  group by id, tensp, loai, id_nsx, gia, soluong, mota, image, xuatsu, created_at, luotxem order by created_at desc limit 9");
   $stmt->execute();
   $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
   return $posts;
